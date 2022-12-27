@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>pineapple</title>
+  </head>
+  <body>
+      <div class="page-container">
+          <div class="base">
+            <div class="topbar">
+              <img src="Union.png" alt="">
+              <p>pineapple.</p>
+              <ul>
+                <li>About</li>
+                <li>How it works</li>
+                <li>Contact</li>
+              </ul>
+            </div><img src="trophy.png" class="trophy" id='trophy'>
+            <div class="main-container">
+              
+              <h1 id="main-head">Subscribe to newsletter</h1>
+              <h2 id="main-text">Subscribe to our newsletter and get 10% discount on pineapple glasses.</h2>
+               </div>
+               <div class="form-container" id='form-container'>
+                 <form id="email-form">
+                   <div class="inputField">
+                      <input type="email" id="input-field" placeholder="Type your email address here...">
+                      <button name="submit" ><span>→</span></button>
+                   </div>
+                   <p class="error" id="error-msg"></p>
+                <div class="check-container">
+                  <input type="checkbox" id="chkbx" onclick="checkedBox()">
+                  <span onclick="checkedBox()" id="tick">✔</span>
+                   <p>I agree to <a href="#">terms of service</a></p>
+                </div>
+              </form>
+               </div>
+              <div class="line"></div>
+              <div class="socials-container">
+                <div id="fb"><a href="#"> <i class="fa fa-facebook" aria-hidden="true"></i></a></div>
+                <div id="ig"><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></div>
+                <div id="tw"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></div>
+                <div id="yt"><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></div>
+              </div>
+          </div>
+            <img class="pineapple" src="image_summer.png" alt="">
+          </div>
+      </div>
+
+      <script>
+        let checkbox = document.querySelector('#chkbx');
+        let checkTick = document.querySelector('#tick');
+        checkTick.style.display = 'none';
+        let checkedCheck = false;
+        let errorMsg = document.querySelector('#error-msg');
+
+        //custom checkbox tick
+
+        function checkedBox(){
+          //check if the box is checked
+          if(checkedCheck == false){
+
+            //if not then onclick make it checked and make the tick appear as well
+            checkTick.style.display = 'block';
+            checkbox.checked = true;
+            checkedCheck = true;
+            //if checked and pressed then make it unchecked and hide the tick
+          }else{
+            checkTick.style.display = 'none';
+            checkbox.checked = false;
+            checkedCheck = false;
+          }
+        }
+   function validateForm() {
+  // Get the checkbox element
+  const checkbox = document.getElementById("chkbx");
+
+  // Get the email input field
+  const email = document.getElementById("input-field").value;
+
+  // Check if the checkbox is checked
+  if (!checkbox.checked) {
+    errorMsg.innerHTML = 'You must accept terms and conditions';
+     redBorders();
+    return false;
+  }
+
+  // Check if the email is valid
+  if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+    errorMsg.innerHTML = 'Please enter a valid e-mail address.';
+    redBorders()
+    return false;
+  }
+
+  // Check if the email ends with .co
+  if (email.endsWith(".co")) {
+    errorMsg.innerHTML = 'We are not accepting subscriptions from Colombia emails';
+    redBorders()
+    return false;
+  }
+
+  // Check if the field is empty
+  if (email === "") {
+    errorMsg.innerHTML = 'E-mail address is required';
+    redBorders()
+    return false;
+  }
+
+  function redBorders(){
+    // if called make all of the borders of input red
+    let borders = document.getElementById('input-field');
+    borders.style.borderBottom = '1px solid #B80808';
+    borders.style.borderTop = '1px solid #B80808';
+    borders.style.borderRight = '1px solid #B80808';
+    borders.style.borderLeft = '4px solid #B80808';
+    borders.style.boxShadow = '0px 30px 40px rgba(19, 24, 33, 0.06)';
+  }
+
+  // If all validation checks pass, return true
+  return true;
+}
+
+
+document.getElementById("email-form").onsubmit = function(e) {
+  e.preventDefault(); // prevent the form from submitting
+  if (validateForm()) {
+    errorMsg.innerHTML = '';
+    thankScreen()
+  }
+}
+
+function thankScreen(){
+  //if called, display thanks message and a trophy and hide form
+  let heading = document.querySelector('#main-head');
+  let text = document.querySelector('#main-text');
+  let container = document.querySelector('#form-container');
+
+  heading.innerHTML = 'Thanks for subscribing!';
+  text.innerHTML = 'You have successfully subscribed to our email listing. Check your email for the discount code.';
+  container.style.display = 'none';
+  document.querySelector('#trophy').style.display = 'block';
+}
+      </script>
+  </body>
+</html>
